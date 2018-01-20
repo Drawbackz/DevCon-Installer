@@ -1,0 +1,106 @@
+﻿<Page x:Class="Devcon_Installer.Views.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Devcon_Installer.Views"
+      mc:Ignorable="d"
+      d:DesignHeight="600" d:DesignWidth="600"
+      Title="MainPage">
+
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <!--Version Selector-->
+            <Grid IsEnabled="{Binding CanInstall}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+
+                <!--Version Select-->
+                <TextBlock Grid.Column="0" Padding="5" Margin="5" TextAlignment="Right">DevCon Version:</TextBlock>
+                <ComboBox Grid.Column="1" Margin="5 5" ItemsSource="{Binding AvailableDownloads}"
+                          SelectedItem="{Binding SelectedDevconDownload, Mode=TwoWay}" />
+                <!--Architecture Select-->
+                <TextBlock Grid.Column="2" Padding="5" Margin="5" TextAlignment="Right">Architecture:</TextBlock>
+                <ComboBox Grid.Column="3" Margin="5 5" ItemsSource="{Binding AvailableArchitectures}"
+                          SelectedItem="{Binding SelectedArchitecture, Mode=TwoWay}" />
+            </Grid>
+
+            <!--Install Directory-->
+            <Grid IsEnabled="{Binding CanInstall}">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+
+                <!--Install Directory-->
+                <TextBlock Grid.Row="1" Grid.Column="0" Padding="5" Margin="5" TextAlignment="Right">Install Directory:</TextBlock>
+                <TextBox Grid.Row="1" Grid.Column="1" Padding="5" Margin="5" Text="{Binding InstallDirectory, Mode=TwoWay}" />
+                <Button Grid.Row="1" Grid.Column="2" Width="Auto" Padding="5" Margin="5"
+                        Command="{Binding OpenDirectoryBrowser}">
+                    ...
+                </Button>
+
+            </Grid>
+
+            <!--Add to Path Checkbox-->
+            <CheckBox IsEnabled="{Binding CanInstall}" Margin="5" VerticalAlignment="Center" IsChecked="{Binding AddToPath}">Add DevCon to environment PATH</CheckBox>
+
+            <!--Progress Bar-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                
+                <!--Bar-->
+                <ProgressBar Grid.Row="0" Grid.Column="0" Padding="5" Margin="5" Value="{Binding Progress}"/>
+                
+                <!--Overlay-->
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock Padding="5" Margin="5" TextAlignment="Left" Text="{Binding StatusText}" />
+                    <TextBlock Padding="5" Margin="10 5" Text="{Binding ProgressText}" />
+                </StackPanel>
+                
+            </Grid>
+            <!--Install Button-->
+            <Grid Margin="5 5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" Padding="5" Command="{Binding InstallCommand}" IsEnabled="{Binding CanInstall}">Install</Button>
+            </Grid>
+        </StackPanel>
+        <!--Log-->
+        <ListBox Margin="5 5" Grid.Row="1" Height="Auto" x:Name="LogListBox" ItemsSource="{Binding Log}" SelectedIndex="{Binding LogIndex}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Message}" Foreground="{Binding Color}">
+                    </TextBlock>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Page>

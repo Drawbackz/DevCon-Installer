@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Devcon_Installer">
+
+    <Style x:Key="HeaderText" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BaseTextBlockStyle}">
+        <Setter Property="Foreground" Value="{StaticResource ForegroundMainBrush}"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        <Setter Property="Margin" Value="0 6"></Setter>
+    </Style>
+
+</ResourceDictionary>
