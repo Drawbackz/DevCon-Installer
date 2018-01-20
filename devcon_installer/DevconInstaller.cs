@@ -56,7 +56,7 @@ namespace devcon_installer
             }
         }
 
-        public string InstallationDirectory { get; set; } = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\DevCon\\";
+        public string InstallationDirectory { get; set; } = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\DevCon";
 
         public static bool IsAdministrator()
         {
@@ -152,7 +152,7 @@ namespace devcon_installer
             if (File.Exists(DownloadPath))
             {
                 Log($"Extracting CAB File {DownloadSource.ExtractionName} from {DownloadPath}");
-                _extractor.ExtractFile(DownloadPath, DownloadSource.ExtractionName, $"{InstallationDirectory}devcon.exe");
+                _extractor.ExtractFile(DownloadPath, DownloadSource.ExtractionName, $"{InstallationDirectory}\\devcon.exe");
             }
             else
             {

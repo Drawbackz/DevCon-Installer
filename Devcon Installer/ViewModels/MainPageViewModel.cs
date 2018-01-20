@@ -12,10 +12,7 @@ namespace Devcon_Installer.ViewModels
 {
     public class MainPageViewModel:BaseViewModel
     {
-        public bool CanInstall
-        {
-            get { return Progress == 0; }
-        }
+        public bool CanInstall => Progress == 0;
 
         private readonly DevconInstaller _installer = new DevconInstaller();
 

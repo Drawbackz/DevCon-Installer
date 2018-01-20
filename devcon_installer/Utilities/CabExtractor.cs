@@ -8,11 +8,11 @@ namespace devcon_installer.Utilities
         public event Action ExtractionStarted;
         public event Action ExtractionCompleted;
 
-        public void ExtractFile(string cabPath, string fileName, string outputFileName)
+        public void ExtractFile(string cabPath, string packedFile, string outputFilePath)
         {
                 SendExtractionStarted();
                 var cabInfo = new CabInfo(cabPath);
-                cabInfo.UnpackFile(fileName, outputFileName);
+                cabInfo.UnpackFile(packedFile, outputFilePath);
                 SendExtractionCompleted();
         }
         
