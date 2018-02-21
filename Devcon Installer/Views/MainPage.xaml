@@ -50,7 +50,8 @@
 
                 <!--Install Directory-->
                 <TextBlock Grid.Row="1" Grid.Column="0" Padding="5" Margin="5" TextAlignment="Right">Install Directory:</TextBlock>
-                <TextBox Grid.Row="1" Grid.Column="1" Padding="5" Margin="5" Text="{Binding InstallDirectory, Mode=TwoWay}" />
+                <TextBox Grid.Row="1" Grid.Column="1" Padding="5" Margin="5"
+                         Text="{Binding InstallDirectory, Mode=TwoWay}" />
                 <Button Grid.Row="1" Grid.Column="2" Width="Auto" Padding="5" Margin="5"
                         Command="{Binding OpenDirectoryBrowser}">
                     ...
@@ -59,7 +60,10 @@
             </Grid>
 
             <!--Add to Path Checkbox-->
-            <CheckBox IsEnabled="{Binding CanInstall}" Margin="5" VerticalAlignment="Center" IsChecked="{Binding AddToPath}">Add DevCon to environment PATH</CheckBox>
+            <CheckBox IsEnabled="{Binding CanInstall}" Margin="5" VerticalAlignment="Center"
+                      IsChecked="{Binding AddToPath}">
+                Add DevCon to environment PATH
+            </CheckBox>
 
             <!--Progress Bar-->
             <Grid>
@@ -70,16 +74,16 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                
+
                 <!--Bar-->
-                <ProgressBar Grid.Row="0" Grid.Column="0" Padding="5" Margin="5" Value="{Binding Progress}"/>
-                
+                <ProgressBar Grid.Row="0" Grid.Column="0" Padding="5" Margin="5" Value="{Binding Progress}" />
+
                 <!--Overlay-->
                 <StackPanel Grid.Row="0" Orientation="Horizontal">
                     <TextBlock Padding="5" Margin="5" TextAlignment="Left" Text="{Binding StatusText}" />
                     <TextBlock Padding="5" Margin="10 5" Text="{Binding ProgressText}" />
                 </StackPanel>
-                
+
             </Grid>
             <!--Install Button-->
             <Grid Margin="5 5">
@@ -94,11 +98,11 @@
             </Grid>
         </StackPanel>
         <!--Log-->
-        <ListBox Margin="5 5" Grid.Row="1" Height="Auto" x:Name="LogListBox" ItemsSource="{Binding Log}" SelectedIndex="{Binding LogIndex}">
+        <ListBox Margin="5 5" Grid.Row="1" Height="Auto" x:Name="LogListBox" ItemsSource="{Binding Log}"
+                 SelectedIndex="{Binding LogIndex}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Message}" Foreground="{Binding Color}">
-                    </TextBlock>
+                    <TextBlock Text="{Binding Message}" Foreground="{Binding Color}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

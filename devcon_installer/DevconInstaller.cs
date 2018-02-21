@@ -11,12 +11,16 @@ namespace devcon_installer
 {
     public class DevconInstaller
     {
-        public event Action<bool> OnCompleted;
-        public event Action<int, string> OnProgressChanged;
-        public event Action<LogMessageBase> OnLog;
+        private readonly CabExtractor _extractor;
+
+        private bool _addEnvironmentPath;
 
         private FileDownloader _downloader;
-        private readonly CabExtractor _extractor;
+
+        public DevconInstaller()
+        {
+            _extractor = new CabExtractor();
+        }
 
         private FileDownloader Downloader
         {
@@ -33,30 +37,32 @@ namespace devcon_installer
                 _downloader.OnDownloadCompleted += DownloaderOnCompleted;
             }
         }
+
         public DevconSource DownloadSource { get; set; }
 
         public string LastError { get; set; }
-        public string DownloadPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "devcon.cab");
 
-        private bool _addEnvironmentPath = false;
+        public string DownloadPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "devcon.cab");
 
         public bool AddEnvironmentPath
         {
-            get { return _addEnvironmentPath; }
+            get => _addEnvironmentPath;
             set
             {
                 if (value)
-                {
                     if (!IsAdministrator())
-                    {
                         return;
-                    }
-                }
                 _addEnvironmentPath = value;
             }
         }
 
-        public string InstallationDirectory { get; set; } = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\DevCon";
+        public string InstallationDirectory { get; set; } =
+            $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\DevCon";
+
+        public event Action<bool> OnCompleted;
+        public event Action<int, string> OnProgressChanged;
+        public event Action<LogMessageBase> OnLog;
 
         public static bool IsAdministrator()
         {
@@ -65,22 +71,18 @@ namespace devcon_installer
             return principal.IsInRole(WindowsBuiltInRole.Administrator);
         }
 
-        public DevconInstaller()
-        {
-            _extractor = new CabExtractor();
-        }
-        
         public void Install(DevconDownload download, SystemArchitecture architecture)
         {
             LastError = null;
             DownloadSource = download.Sources.First(dl => dl.Architecture == architecture);
-            if (DownloadSource == null){throw new Exception("Download source does not suppport this achitecture");}
+            if (DownloadSource == null) throw new Exception("Download source does not suppport this achitecture");
 
             Log("DevCon Installation Started");
             Downloader = new FileDownloader(DownloadSource.Url, DownloadPath);
             Downloader.StartDownload();
             Log("Download Started");
         }
+
         public void Cancel()
         {
             Downloader.CancelDownload();
@@ -93,7 +95,6 @@ namespace devcon_installer
             {
                 Log("Download completed");
                 if (ValidateCabDownload())
-                {
                     try
                     {
                         OnProgressChanged?.Invoke(50, "Extracting...");
@@ -112,11 +113,8 @@ namespace devcon_installer
                         LastError = e.Message;
                         Log(e.Message, true);
                     }
-                }
                 else
-                {
                     LastError = "Download file failed validation";
-                }
             }
             else
             {
@@ -132,7 +130,7 @@ namespace devcon_installer
         {
             Log("Verifying downloaded file...");
             OnProgressChanged?.Invoke(50, "Validating...");
-            if (!File.Exists(DownloadPath)){return false;}
+            if (!File.Exists(DownloadPath)) return false;
             var hash = DownloadSource.Sha256;
             Log($"Expected hash: {hash}");
             var applicationHash = ChecksumTool.GetHashFromFile(DownloadPath, Algorithms.SHA256);
@@ -146,19 +144,21 @@ namespace devcon_installer
             Log("File verification failed", true);
             return false;
         }
-        
+
         private void ExtractDevconCab()
         {
             if (File.Exists(DownloadPath))
             {
                 Log($"Extracting CAB File {DownloadSource.ExtractionName} from {DownloadPath}");
-                _extractor.ExtractFile(DownloadPath, DownloadSource.ExtractionName, $"{InstallationDirectory}\\devcon.exe");
+                _extractor.ExtractFile(DownloadPath, DownloadSource.ExtractionName,
+                    $"{InstallationDirectory}\\devcon.exe");
             }
             else
             {
                 Log("CAB file was not found", true);
             }
         }
+
         private void RegisterPath()
         {
             Log("Registering DevCon to System PATH");
@@ -167,8 +167,8 @@ namespace devcon_installer
                 const string name = "PATH";
                 var pathString = Environment.GetEnvironmentVariable(name);
 
-                if (pathString == null) { throw new Exception("Unable to get path data"); }
-                if (pathString.Contains(InstallationDirectory)) { return; }
+                if (pathString == null) throw new Exception("Unable to get path data");
+                if (pathString.Contains(InstallationDirectory)) return;
 
                 var value = pathString + $";{InstallationDirectory}";
                 const EnvironmentVariableTarget target = EnvironmentVariableTarget.Machine;
@@ -184,9 +184,8 @@ namespace devcon_installer
         private void Log(string message, bool isError = false)
         {
             message = $"{DateTime.Now.ToLongTimeString()}: {message}";
-            LogMessageBase logItem = isError ? new LogMessageError(message) as LogMessageBase : new LogMessage(message);
+            var logItem = isError ? new LogMessageError(message) as LogMessageBase : new LogMessage(message);
             OnLog?.Invoke(logItem);
         }
     }
-
 }

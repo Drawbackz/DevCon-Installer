@@ -5,14 +5,14 @@ namespace Devcon_Installer.ViewModels.Base
 {
     public class RelayCommand : ICommand
     {
-        public event EventHandler CanExecuteChanged = (sender, e) => { };
-
         private readonly Action _action;
 
         public RelayCommand(Action action)
         {
             _action = action;
         }
+
+        public event EventHandler CanExecuteChanged = (sender, e) => { };
 
         public bool CanExecute(object parameter)
         {

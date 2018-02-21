@@ -1,5 +1,4 @@
-﻿using System;
-namespace devcon_installer
+﻿namespace devcon_installer
 {
     public enum SystemArchitecture
     {

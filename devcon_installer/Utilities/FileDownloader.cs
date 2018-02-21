@@ -7,13 +7,6 @@ namespace devcon_installer.Utilities
     {
         private readonly WebClient _downloadClient = new WebClient();
 
-        public event Action OnDownloadStarted;
-        public event Action<bool> OnDownloadCompleted;
-        public event Action<int, string> OnProgressChanged;
-
-        public string DownloadUrl { get; }
-        public string SavePath { get; }
-
         public FileDownloader(string downloadUrl, string savePath)
         {
             DownloadUrl = downloadUrl;
@@ -23,14 +16,23 @@ namespace devcon_installer.Utilities
             {
                 OnDownloadCompleted?.Invoke(!e.Cancelled && e.Error == null);
             };
-            _downloadClient.DownloadProgressChanged += (sender, args) => OnProgressChanged?.Invoke(args.ProgressPercentage, "Downloading...");
+            _downloadClient.DownloadProgressChanged += (sender, args) =>
+                OnProgressChanged?.Invoke(args.ProgressPercentage, "Downloading...");
         }
-        
+
+        public string DownloadUrl { get; }
+        public string SavePath { get; }
+
+        public event Action OnDownloadStarted;
+        public event Action<bool> OnDownloadCompleted;
+        public event Action<int, string> OnProgressChanged;
+
         public void StartDownload()
         {
             _downloadClient.DownloadFileAsync(new Uri(DownloadUrl), SavePath);
             OnDownloadStarted?.Invoke();
         }
+
         public void CancelDownload()
         {
             _downloadClient.CancelAsync();

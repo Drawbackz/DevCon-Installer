@@ -2,7 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 
-namespace devcon_installer
+namespace devcon_installer.Utilities
 {
     public static class Algorithms
     {
@@ -13,6 +13,7 @@ namespace devcon_installer
         public static readonly HashAlgorithm SHA512 = new SHA512Managed();
         public static readonly HashAlgorithm RIPEMD160 = new RIPEMD160Managed();
     }
+
     public static class ChecksumTool
     {
         public static string GetHashFromFile(string fileName, HashAlgorithm algorithm)
@@ -21,6 +22,6 @@ namespace devcon_installer
             {
                 return BitConverter.ToString(algorithm.ComputeHash(stream)).Replace("-", string.Empty);
             }
-        }        
+        }
     }
 }

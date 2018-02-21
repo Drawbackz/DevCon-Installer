@@ -5,23 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:Devcon_Installer.Views"
         mc:Ignorable="d"
-        Title="DevCon Installer" Height="400" Width="700" 
+        Title="DevCon Installer" Height="400" Width="700"
         Icon="../Images/Logo/logo-small.png"
         WindowStyle="None"
         AllowsTransparency="True"
         x:Name="AppWindow"
         WindowStartupLocation="CenterScreen"
         MinHeight="{Binding WindowMinimumHeight}"
-        MinWidth="{Binding WindowMinimumWidth}"
-        >
-    
+        MinWidth="{Binding WindowMinimumWidth}">
+
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="{Binding TitleHeight}"
-                      CornerRadius="{Binding WindowCornerRadius}" ResizeBorderThickness="{Binding ResizeBorderThickness}"
-                      GlassFrameThickness="0"
-                      />
+                      CornerRadius="{Binding WindowCornerRadius}"
+                      ResizeBorderThickness="{Binding ResizeBorderThickness}"
+                      GlassFrameThickness="0" />
     </WindowChrome.WindowChrome>
-    
+
     <Window.Resources>
         <Style TargetType="{x:Type views:MainWindow}">
             <Setter Property="Template">
@@ -30,54 +29,58 @@
                         <Border Padding="{Binding OuterMarginSizeThickness, FallbackValue=10}">
                             <Grid>
 
-                                <Border x:Name="Container" 
+                                <Border x:Name="Container"
                                         Background="{StaticResource BackgroundLightBrush}"
-                                        CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}"/>
+                                        CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}" />
 
 
-                                <Border CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}" Background="{Binding ForegroundLightBrush, FallbackValue=White}">
+                                <Border CornerRadius="{Binding WindowCornerRadius, FallbackValue=10}"
+                                        Background="{Binding ForegroundLightBrush, FallbackValue=White}">
                                     <Border.Effect>
-                                        <DropShadowEffect ShadowDepth="0" Opacity="0.2">
-                                            
-                                        </DropShadowEffect>
+                                        <DropShadowEffect ShadowDepth="0" Opacity="0.2" />
                                     </Border.Effect>
                                 </Border>
-                                
+
                                 <Grid>
-                                    
+
                                     <Grid.OpacityMask>
-                                        <VisualBrush Visual="{Binding ElementName=Container}"></VisualBrush>
+                                        <VisualBrush Visual="{Binding ElementName=Container}" />
                                     </Grid.OpacityMask>
-                                    
+
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="{Binding TitleHeightGridLength, FallbackValue=42}"></RowDefinition>
-                                        <RowDefinition Height="Auto"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
+                                        <RowDefinition Height="{Binding TitleHeightGridLength, FallbackValue=42}" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
 
                                     <Grid Grid.Column="0" ZIndex="1">
-                                        
+
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
 
-                                        <Button Style="{StaticResource SystemIconButton}" Command="{Binding MenuCommand}" Grid.Column="0">
-                                            <Image Source="../Images/Logo/logo-small.png"/>
+                                        <Button Style="{StaticResource SystemIconButton}"
+                                                Command="{Binding MenuCommand}" Grid.Column="0">
+                                            <Image Source="../Images/Logo/logo-small.png" />
                                         </Button>
 
                                         <Viewbox Grid.Column="1" Margin="0">
-                                            <TextBlock Style="{StaticResource HeaderText}" Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Title, FallbackValue=Debug Value}"></TextBlock>
+                                            <TextBlock Style="{StaticResource HeaderText}"
+                                                       Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Title, FallbackValue=Debug Value}" />
                                         </Viewbox>
 
                                         <StackPanel Grid.Column="2" Orientation="Horizontal">
-                                            <Button Content="_" Style="{StaticResource WindowControlButton}" Command="{Binding MinimizeCommand}"></Button>
-                                            <Button Content="[ ]" Style="{StaticResource WindowControlButton}" Command="{Binding MaximizeCommand}"></Button>
-                                            <Button Content="X" Style="{StaticResource WindowCloseButton}" Command="{Binding CloseCommand}"></Button>
+                                            <Button Content="_" Style="{StaticResource WindowControlButton}"
+                                                    Command="{Binding MinimizeCommand}" />
+                                            <Button Content="[ ]" Style="{StaticResource WindowControlButton}"
+                                                    Command="{Binding MaximizeCommand}" />
+                                            <Button Content="X" Style="{StaticResource WindowCloseButton}"
+                                                    Command="{Binding CloseCommand}" />
                                         </StackPanel>
-                                        
-                                        
+
+
                                     </Grid>
 
                                     <!--Drop Shadow-->
@@ -85,41 +88,41 @@
                                         <!--Underline-->
                                         <Border.BorderBrush>
                                             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="0.0"></GradientStop>
-                                                <GradientStop Color="{StaticResource ForegroundMain}" Offset="0.5"></GradientStop>
-                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="1.0"></GradientStop>
+                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="0.0" />
+                                                <GradientStop Color="{StaticResource ForegroundMain}" Offset="0.5" />
+                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="1.0" />
                                             </LinearGradientBrush>
                                         </Border.BorderBrush>
                                         <!--Drop Shadow-->
                                         <Border.Background>
                                             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                                                <GradientStop Color="{StaticResource BackgroundVeryLight}" Offset="0.0"></GradientStop>
-                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="1.0"></GradientStop>                                                
+                                                <GradientStop Color="{StaticResource BackgroundVeryLight}" Offset="0.0" />
+                                                <GradientStop Color="{StaticResource ForegroundLight}" Offset="1.0" />
                                             </LinearGradientBrush>
                                         </Border.Background>
                                     </Border>
-                                    
+
                                     <!--Page Content-->
                                     <Border Grid.Row="2" Padding="{Binding InnerContentPaddingThickness}">
-                                        <ContentPresenter Content="{TemplateBinding Content}"></ContentPresenter>
+                                        <ContentPresenter Content="{TemplateBinding Content}" />
                                     </Border>
                                 </Grid>
-                                
+
                             </Grid>
                         </Border>
                     </ControlTemplate>
-                    
+
                 </Setter.Value>
             </Setter>
         </Style>
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Frame Grid.Column="0" Grid.Row="0" x:Name="Temp" Content="{Binding Page}"/>
+        <Frame Grid.Column="0" Grid.Row="0" x:Name="Temp" Content="{Binding Page}" />
     </Grid>
 </Window>

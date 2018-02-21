@@ -4,7 +4,7 @@ using Devcon_Installer.ViewModels;
 namespace Devcon_Installer.Views
 {
     /// <summary>
-    /// Interaction logic for MainPage.xaml
+    ///     Interaction logic for MainPage.xaml
     /// </summary>
     public partial class MainPage : Page
     {

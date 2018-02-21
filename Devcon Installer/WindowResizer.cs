@@ -6,44 +6,27 @@ using System.Windows.Interop;
 namespace Devcon_Installer
 {
     /// <summary>
-    /// Fixes the issue with Windows of Style <see cref="WindowStyle.None"/> covering the taskbar
+    ///     Fixes the issue with Windows of Style <see cref="WindowStyle.None" /> covering the taskbar
     /// </summary>
     public class WindowResizer
     {
-        public bool Enabled { get; set; } = true;
-        public bool FullScreen { get; set; } = false;
-
         #region Private Members
 
         /// <summary>
-        /// The window to handle the resizing for
+        ///     The window to handle the resizing for
         /// </summary>
-        private System.Windows.Window mWindow;
-
-        #endregion
-
-        #region Dll Imports
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool GetCursorPos(out POINT lpPoint);
-
-        [DllImport("user32.dll")]
-        static extern bool GetMonitorInfo(IntPtr hMonitor, MONITORINFO lpmi);
-
-        [DllImport("user32.dll", SetLastError = true)]
-        static extern IntPtr MonitorFromPoint(POINT pt, MonitorOptions dwFlags);
+        private readonly Window mWindow;
 
         #endregion
 
         #region Constructor
 
         /// <summary>
-        /// Default constructor
+        ///     Default constructor
         /// </summary>
         /// <param name="window">The window to monitor and correctly maximize</param>
         /// <param name="adjustSize">The callback for the host to adjust the maximum available size if needed</param>
-        public WindowResizer(System.Windows.Window window)
+        public WindowResizer(Window window)
         {
             mWindow = window;
 
@@ -53,17 +36,20 @@ namespace Devcon_Installer
 
         #endregion
 
+        public bool Enabled { get; set; } = true;
+        public bool FullScreen { get; set; } = false;
+
         #region Initialize
 
         /// <summary>
-        /// Initialize and hook into the windows message pump
+        ///     Initialize and hook into the windows message pump
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Window_SourceInitialized(object sender, System.EventArgs e)
+        private void Window_SourceInitialized(object sender, EventArgs e)
         {
             // Get the handle of this window
-            var handle = (new WindowInteropHelper(mWindow)).Handle;
+            var handle = new WindowInteropHelper(mWindow).Handle;
             var handleSource = HwndSource.FromHwnd(handle);
 
             // If not found, end
@@ -79,7 +65,7 @@ namespace Devcon_Installer
         #region Windows Proc
 
         /// <summary>
-        /// Listens out for all windows messages for this window
+        ///     Listens out for all windows messages for this window
         /// </summary>
         /// <param name="hwnd"></param>
         /// <param name="msg"></param>
@@ -90,7 +76,6 @@ namespace Devcon_Installer
         private IntPtr WindowProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
             if (Enabled)
-            {
                 switch (msg)
                 {
                     // Handle the GetMinMaxInfo of the Window
@@ -99,38 +84,33 @@ namespace Devcon_Installer
                         handled = true;
                         break;
                 }
-            }
             else
-            {
                 handled = false;
-            }
 
-            return (IntPtr)0;
+            return (IntPtr) 0;
         }
 
         #endregion
 
         /// <summary>
-        /// Get the min/max window size for this window
-        /// Correctly accounting for the taskbar size and position
+        ///     Get the min/max window size for this window
+        ///     Correctly accounting for the taskbar size and position
         /// </summary>
         /// <param name="hwnd"></param>
         /// <param name="lParam"></param>
-        private void WmGetMinMaxInfo(System.IntPtr hwnd, System.IntPtr lParam)
+        private void WmGetMinMaxInfo(IntPtr hwnd, IntPtr lParam)
         {
             POINT lMousePosition;
             GetCursorPos(out lMousePosition);
 
-            IntPtr lPrimaryScreen = MonitorFromPoint(new POINT(0, 0), MonitorOptions.MONITOR_DEFAULTTOPRIMARY);
-            MONITORINFO lPrimaryScreenInfo = new MONITORINFO();
+            var lPrimaryScreen = MonitorFromPoint(new POINT(0, 0), MonitorOptions.MONITOR_DEFAULTTOPRIMARY);
+            var lPrimaryScreenInfo = new MONITORINFO();
             if (GetMonitorInfo(lPrimaryScreen, lPrimaryScreenInfo) == false)
-            {
                 return;
-            }
 
-            IntPtr lCurrentScreen = MonitorFromPoint(lMousePosition, MonitorOptions.MONITOR_DEFAULTTONEAREST);
+            var lCurrentScreen = MonitorFromPoint(lMousePosition, MonitorOptions.MONITOR_DEFAULTTONEAREST);
 
-            MINMAXINFO lMmi = (MINMAXINFO)Marshal.PtrToStructure(lParam, typeof(MINMAXINFO));
+            var lMmi = (MINMAXINFO) Marshal.PtrToStructure(lParam, typeof(MINMAXINFO));
 
             if (lPrimaryScreen.Equals(lCurrentScreen))
             {
@@ -150,11 +130,25 @@ namespace Devcon_Installer
             // Now we have the max size, allow the host to tweak as needed
             Marshal.StructureToPtr(lMmi, lParam, true);
         }
+
+        #region Dll Imports
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        private static extern bool GetCursorPos(out POINT lpPoint);
+
+        [DllImport("user32.dll")]
+        private static extern bool GetMonitorInfo(IntPtr hMonitor, MONITORINFO lpmi);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern IntPtr MonitorFromPoint(POINT pt, MonitorOptions dwFlags);
+
+        #endregion
     }
 
     #region Dll Helper Structures
 
-    enum MonitorOptions : uint
+    internal enum MonitorOptions : uint
     {
         MONITOR_DEFAULTTONULL = 0x00000000,
         MONITOR_DEFAULTTOPRIMARY = 0x00000001,
@@ -166,9 +160,9 @@ namespace Devcon_Installer
     public class MONITORINFO
     {
         public int cbSize = Marshal.SizeOf(typeof(MONITORINFO));
+        public int dwFlags = 0;
         public Rectangle rcMonitor = new Rectangle();
         public Rectangle rcWork = new Rectangle();
-        public int dwFlags = 0;
     }
 
 
@@ -179,10 +173,10 @@ namespace Devcon_Installer
 
         public Rectangle(int left, int top, int right, int bottom)
         {
-            this.Left = left;
-            this.Top = top;
-            this.Right = right;
-            this.Bottom = bottom;
+            Left = left;
+            Top = top;
+            Right = right;
+            Bottom = bottom;
         }
     }
 
@@ -194,27 +188,28 @@ namespace Devcon_Installer
         public POINT ptMaxPosition;
         public POINT ptMinTrackSize;
         public POINT ptMaxTrackSize;
-    };
+    }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct POINT
     {
         /// <summary>
-        /// x coordinate of point.
+        ///     x coordinate of point.
         /// </summary>
         public int X;
+
         /// <summary>
-        /// y coordinate of point.
+        ///     y coordinate of point.
         /// </summary>
         public int Y;
 
         /// <summary>
-        /// Construct a point of coordinates (x,y).
+        ///     Construct a point of coordinates (x,y).
         /// </summary>
         public POINT(int x, int y)
         {
-            this.X = x;
-            this.Y = y;
+            X = x;
+            Y = y;
         }
     }
 

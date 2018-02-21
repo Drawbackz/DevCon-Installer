@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace devcon_installer.Logging
+﻿namespace devcon_installer.Logging
 {
     public abstract class LogMessageBase
     {

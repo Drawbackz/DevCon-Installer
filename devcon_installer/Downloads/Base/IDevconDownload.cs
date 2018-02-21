@@ -1,6 +1,6 @@
 ﻿namespace devcon_installer.Downloads.Base
 {
-    interface IDevconDownload
+    internal interface IDevconDownload
     {
         string Name { get; }
         DevconSource[] Sources { get; }

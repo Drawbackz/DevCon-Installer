@@ -10,16 +10,17 @@ namespace devcon_installer.Utilities
 
         public void ExtractFile(string cabPath, string packedFile, string outputFilePath)
         {
-                SendExtractionStarted();
-                var cabInfo = new CabInfo(cabPath);
-                cabInfo.UnpackFile(packedFile, outputFilePath);
-                SendExtractionCompleted();
+            SendExtractionStarted();
+            var cabInfo = new CabInfo(cabPath);
+            cabInfo.UnpackFile(packedFile, outputFilePath);
+            SendExtractionCompleted();
         }
-        
+
         private void SendExtractionStarted()
         {
             ExtractionStarted?.Invoke();
         }
+
         private void SendExtractionCompleted()
         {
             ExtractionCompleted?.Invoke();
