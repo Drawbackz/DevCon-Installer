@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Forms;
@@ -28,6 +29,7 @@ namespace Devcon_Installer.ViewModels
                 ProgressText = i == 0 ? string.Empty : i + "%";
                 StatusText = s;
             };
+            _installer.OnSourcesUpdated += UpdateAvailableDownloads;
             UpdateAvailableDownloads();
         }
 
@@ -58,6 +60,10 @@ namespace Devcon_Installer.ViewModels
             get => _selectedDevconDownload;
             set
             {
+                if (value == null)
+                {
+                    return;
+                }
                 var architectures = new List<SystemArchitecture>();
                 foreach (var devconSource in value.Sources)
                     if (!architectures.Contains(devconSource.Architecture))
@@ -86,6 +92,11 @@ namespace Devcon_Installer.ViewModels
             _installer.Install(SelectedDevconDownload, SelectedArchitecture);
         });
 
+        public RelayCommand UpdateCommand => new RelayCommand(() =>
+        {
+            _installer.UpdateSources();
+        });
+
         public RelayCommand OpenDirectoryBrowser => new RelayCommand(() =>
         {
             var d = new FolderBrowserDialog();
@@ -93,12 +104,27 @@ namespace Devcon_Installer.ViewModels
             if (Directory.Exists(d.SelectedPath))
                 InstallDirectory = d.SelectedPath;
         });
-
         private void UpdateAvailableDownloads()
         {
-            AvailableDownloads = new ObservableCollection<DevconDownload>(DevconSources.ReadSaveFile());
-            if (AvailableDownloads.Count > 0)
+            SelectedDevconDownload = null;
+
+            var sources = DevconSources.ReadSaveFile();
+            if (sources == null)
+            {
+                var dt = DateTime.Now.ToLongTimeString();
+                Log.Add(new LogMessageError($"{dt}: There was an error processing the DevCon sources file"));
+                Log.Add(new LogMessageError($"{dt}: Delete or repair devcon_sources.json and restart the application"));
+                Log.Add(new LogMessage($"{dt}: Using default DevCon sources"));
+                AvailableDownloads = new ObservableCollection<DevconDownload>(DevconSources.DefaultSources);
+            }
+            else
+            {
+                AvailableDownloads = new ObservableCollection<DevconDownload>(sources);
+            }
+            if(AvailableDownloads.Count > 0)
                 SelectedDevconDownload = AvailableDownloads[0];
         }
+
+
     }
 }

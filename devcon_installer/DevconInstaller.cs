@@ -1,11 +1,14 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http.Headers;
 using System.Security.Principal;
 using devcon_installer.Downloads;
 using devcon_installer.Downloads.Base;
 using devcon_installer.Logging;
 using devcon_installer.Utilities;
+using Newtonsoft.Json;
 
 namespace devcon_installer
 {
@@ -63,6 +66,7 @@ namespace devcon_installer
         public event Action<bool> OnCompleted;
         public event Action<int, string> OnProgressChanged;
         public event Action<LogMessageBase> OnLog;
+        public event Action OnSourcesUpdated;
 
         public static bool IsAdministrator()
         {
@@ -77,16 +81,43 @@ namespace devcon_installer
             DownloadSource = download.Sources.First(dl => dl.Architecture == architecture);
             if (DownloadSource == null) throw new Exception("Download source does not suppport this achitecture");
 
-            Log("DevCon Installation Started");
+            Log("DevCon installation started");
             Downloader = new FileDownloader(DownloadSource.Url, DownloadPath);
             Downloader.StartDownload();
-            Log("Download Started");
+            Log("Download started");
+        }
+
+        public void UpdateSources()
+        {
+            Log("Updating DevCon sources...");
+            using (var wc = new WebClient())
+            {
+                wc.DownloadProgressChanged += (sender, args) =>
+                {
+                    OnProgressChanged?.Invoke(args.ProgressPercentage, "Downloading...");
+                };
+                wc.DownloadFileCompleted += (sender, args) =>
+                {
+
+                    if (args.Error != null)
+                    {
+                        Log("Unable to download DevCon sources update", true);
+                    }
+                    else
+                    {
+                        OnSourcesUpdated?.Invoke();
+                        Log("DevCon sources updated");
+                    }
+                    OnProgressChanged?.Invoke(0, string.Empty);
+                };
+                wc.DownloadFileAsync(new Uri("https://raw.githubusercontent.com/Drawbackz/DevCon-Sources/master/devcon_sources.json"), $"{Environment.CurrentDirectory}\\devcon_sources.json");
+            }
         }
 
         public void Cancel()
         {
             Downloader.CancelDownload();
-            Log("Installation Cancelled", true);
+            Log("Installation cancelled", true);
         }
 
         private void DownloaderOnCompleted(bool success)
@@ -105,7 +136,7 @@ namespace devcon_installer
                         {
                             OnProgressChanged?.Invoke(50, "Registering path...");
                             RegisterPath();
-                            OnProgressChanged?.Invoke(100, "Path Registered.");
+                            OnProgressChanged?.Invoke(100, "Path registered.");
                         }
                     }
                     catch (Exception e)
@@ -118,7 +149,7 @@ namespace devcon_installer
             }
             else
             {
-                LastError = "Download Failed";
+                LastError = "Download failed";
                 Log("Download failed", true);
             }
             OnCompleted?.Invoke(LastError == null);
@@ -149,7 +180,7 @@ namespace devcon_installer
         {
             if (File.Exists(DownloadPath))
             {
-                Log($"Extracting CAB File {DownloadSource.ExtractionName} from {DownloadPath}");
+                Log($"Extracting CAB file {DownloadSource.ExtractionName} from {DownloadPath}");
                 _extractor.ExtractFile(DownloadPath, DownloadSource.ExtractionName,
                     $"{InstallationDirectory}\\devcon.exe");
             }
@@ -161,7 +192,7 @@ namespace devcon_installer
 
         private void RegisterPath()
         {
-            Log("Registering DevCon to System PATH");
+            Log("Registering DevCon to system PATH");
             try
             {
                 const string name = "PATH";
@@ -173,7 +204,7 @@ namespace devcon_installer
                 var value = pathString + $";{InstallationDirectory}";
                 const EnvironmentVariableTarget target = EnvironmentVariableTarget.Machine;
                 Environment.SetEnvironmentVariable(name, value, target);
-                Log("DevCon to System PATH success");
+                Log("DevCon to system PATH success");
             }
             catch (Exception e)
             {
