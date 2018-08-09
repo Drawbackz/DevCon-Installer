@@ -89,7 +89,12 @@ namespace devcon_installer
 
         public void UpdateSources()
         {
+            LastError = null;
             Log("Updating DevCon sources...");
+            if (File.Exists($"{Environment.CurrentDirectory}\\devcon_sources.json"))
+            {
+                File.Move($"{Environment.CurrentDirectory}\\devcon_sources.json", $"{Environment.CurrentDirectory}\\devcon_sources.json.bak");
+            }
             using (var wc = new WebClient())
             {
                 wc.DownloadProgressChanged += (sender, args) =>
@@ -98,19 +103,28 @@ namespace devcon_installer
                 };
                 wc.DownloadFileCompleted += (sender, args) =>
                 {
-
                     if (args.Error != null)
                     {
+                        File.Delete($"{Environment.CurrentDirectory}\\devcon_sources.json");
+                        if (File.Exists($"{Environment.CurrentDirectory}\\devcon_sources.json.bak"))
+                        {
+                            File.Move($"{Environment.CurrentDirectory}\\devcon_sources.json.bak", $"{Environment.CurrentDirectory}\\devcon_sources.json");
+                        }
+                        else
+                        {
+                            File.WriteAllText($"{Environment.CurrentDirectory}\\devcon_sources.json", JsonConvert.ToString(DevconSources.DefaultSources));
+                        }
                         Log("Unable to download DevCon sources update", true);
                     }
                     else
                     {
+                        File.Delete($"{Environment.CurrentDirectory}\\devcon_sources.json.bak");
                         OnSourcesUpdated?.Invoke();
                         Log("DevCon sources updated");
                     }
                     OnProgressChanged?.Invoke(0, string.Empty);
                 };
-                wc.DownloadFileAsync(new Uri("https://raw.githubusercontent.com/Drawbackz/DevCon-Sources/master/devcon_sources.json"), $"{Environment.CurrentDirectory}\\devcon_sources.json");
+                wc.DownloadFileAsync(new Uri("https://raw.githubusercontent.com/Drawbackz/DevCon-Installer/master/devcon_sources.json"), $"{Environment.CurrentDirectory}\\devcon_sources.json");
             }
         }
 
