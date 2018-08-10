@@ -13,27 +13,27 @@ The Application can also add DevCon to the system PATH environment variable if s
 
 <h4>Supported Versions:</h4>
 <b>
-Windows XP/Vista + Windows Server 2003 x86
-<br>
 Windows 10 version 1803 (April 2018 Update)
 <br>
-Windows 10 version 1709 (Fall Creators Update) x86 and x64
+Windows 10 version 1709 (Fall Creators Update)
 <br>
-Windows 10 version 1703 (Creators Update) x86 and x64
+Windows 10 version 1703 (Creators Update)
 <br>
-Windows 10 version 1607 (Anniversary Update) x86 and x64
+Windows 10 version 1607 (Anniversary Update)
 <br>
-Windows 10 version 1511 (November Update) x86 and x64
+Windows 10 version 1511 (November Update)
 <br>
-Windows 10 version 1507 x86 and x64
+Windows 10 version 1507
 <br>
-Windows 10 Insider Preview x86 and x64
+Windows 10 Insider Preview
 <br>
-Windows 8.1 Update x86 and x64
+Windows 8.1 Update
 <br>
-Windows 8.1 x86 and x64
+Windows 8.1
 <br>
-Windows 8 x86 and x64
+Windows 8
+<br>
+Windows XP/Vista + Windows Server 2003 (x86 only)
 </b>
 <br>
 
