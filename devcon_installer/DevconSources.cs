@@ -25,7 +25,7 @@ namespace devcon_installer
                             "https://download.microsoft.com/download/B/5/8/B58D625D-17D6-47A8-B3D3-668670B6D1EB/wdk/Installers/82c1721cd310c73968861674ffc209c9.cab",
                         Architecture = SystemArchitecture.X86,
                         ExtractionName = "fil5a9177f816435063f779ebbbd2c1a1d2",
-                        Sha256 = "31f7362eeb287327d8a58ab54f5f853d6329522a5c368aa824c64a09d8665be4"
+                        Sha256 = "31F7362EEB287327D8A58AB54F5F853D6329522A5C368AA824C64A09D8665BE4"
                     },
                     new DevconSource
                     {
@@ -33,7 +33,7 @@ namespace devcon_installer
                             "https://download.microsoft.com/download/B/5/8/B58D625D-17D6-47A8-B3D3-668670B6D1EB/wdk/Installers/787bee96dbd26371076b37b13c405890.cab",
                         Architecture = SystemArchitecture.X64,
                         ExtractionName = "filbad6e2cce5ebc45a401e19c613d0a28f",
-                        Sha256 = "bf402ae3a77d14538f6f66646cee999d1c668b1acb15f3e6862c6dd59e65cd0f"
+                        Sha256 = "BF402AE3A77D14538F6F66646CEE999D1C668B1ACB15F3E6862C6DD59E65CD0F"
                     }
                 }
             },
@@ -148,7 +148,7 @@ namespace devcon_installer
                             "https://download.microsoft.com/download/D/B/5/DB538B89-04A0-4D74-AD65-E721D93FFD08/wdk/Installers/787bee96dbd26371076b37b13c405890.cab",
                         Architecture = SystemArchitecture.X64,
                         ExtractionName = "filbad6e2cce5ebc45a401e19c613d0a28f",
-                        Sha256 = "39c6885559ff87cb12a365cc569fc09e2d21463c7568d1615ba9cc0745c5713d"
+                        Sha256 = "39C6885559FF87CB12A365CC569FC09E2D21463C7568D1615BA9CC0745C5713D"
                     }
                 }
             },
