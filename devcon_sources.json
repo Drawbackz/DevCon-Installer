@@ -1,4 +1,21 @@
 [
+    {
+    "Name": "Windows 10 version 1809",
+    "Sources": [
+      {
+        "Sha256": "2469C602B861F8A87D4625459F3174CD50A86BFDD00FF38288341DFF8FCE1195",
+        "Url": "https://download.microsoft.com/download/1/4/0/140EBDB7-F631-4191-9DC0-31C8ECB8A11F/wdk/Installers/82c1721cd310c73968861674ffc209c9.cab",
+        "ExtractionName": "fil5a9177f816435063f779ebbbd2c1a1d2",
+        "Architecture": "X86"
+      },
+      {
+        "Sha256": "54004C83EE34F6A55380528A8B29F4C400E61FBB947A19E0AB9E5A193D7D961E",
+        "Url": "https://download.microsoft.com/download/1/4/0/140EBDB7-F631-4191-9DC0-31C8ECB8A11F/wdk/Installers/787bee96dbd26371076b37b13c405890.cab",
+        "ExtractionName": "filbad6e2cce5ebc45a401e19c613d0a28f",
+        "Architecture": "X64"
+      }
+    ]
+  },
   {
     "Name": "Windows 10 version 1803 (April 2018 Update)",
     "Sources": [
