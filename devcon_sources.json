@@ -1,4 +1,21 @@
 [
+  {
+    "Name": "Windows 10 version 1903",
+    "Sources": [
+      {
+        "Sha256": "8DF4A1EB40894C98C6453EB5833DCF0196C638AFC91E7F8E9F879E28BE96D50D",
+        "Url": "https://download.microsoft.com/download/2/9/3/29376990-B744-43C5-AE5C-99405068D58B/wdk/Installers/82c1721cd310c73968861674ffc209c9.cab",
+        "ExtractionName": "fil5a9177f816435063f779ebbbd2c1a1d2",
+        "Architecture": "X86"
+      },
+      {
+        "Sha256": "411685D0D8168545CCB84D38CF25EBDC2FE38629B051E069682871C9FB9E3E4D",
+        "Url": "https://download.microsoft.com/download/2/9/3/29376990-B744-43C5-AE5C-99405068D58B/wdk/Installers/787bee96dbd26371076b37b13c405890.cab",
+        "ExtractionName": "filbad6e2cce5ebc45a401e19c613d0a28f",
+        "Architecture": "X64"
+      }
+    ]
+  },
     {
     "Name": "Windows 10 version 1809",
     "Sources": [
