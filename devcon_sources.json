@@ -1,4 +1,21 @@
 [
+    {
+    "Name": "Windows 10 version 2004",
+    "Sources": [
+      {
+        "Sha256": "D208B1CCA01B47016B0DFDF37B74C7B2242061B04866F599A9D54113541562F4",
+        "Url": "https://download.microsoft.com/download/1/a/7/1a730121-7aa7-46f7-8978-7db729aa413d/wdk/Installers/82c1721cd310c73968861674ffc209c9.cab",
+        "ExtractionName": "fil5a9177f816435063f779ebbbd2c1a1d2",
+        "Architecture": "X86"
+      },
+      {
+        "Sha256": "DE73C76E87C4BDBA222701180BEA6F7E26379CE3C4830B70A0CA4143789FA555",
+        "Url": "https://download.microsoft.com/download/1/a/7/1a730121-7aa7-46f7-8978-7db729aa413d/wdk/Installers/787bee96dbd26371076b37b13c405890.cab",
+        "ExtractionName": "filbad6e2cce5ebc45a401e19c613d0a28f",
+        "Architecture": "X64"
+      }
+    ]
+  },
   {
     "Name": "Windows 10 version 1903",
     "Sources": [
