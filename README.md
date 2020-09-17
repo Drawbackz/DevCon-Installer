@@ -46,7 +46,7 @@ Windows XP/Vista + Windows Server 2003 (x86 only)
 ---
 <small>
 <small>
-Download sources provided by <b>NetwOrchestration</b> @ superuser.com
+Original download sources provided by <b>NetwOrchestration</b> @ superuser.com
 <br>
 https://superuser.com/questions/1002950/quick-method-to-install-devcon-exe
 </small>
