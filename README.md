@@ -1,5 +1,8 @@
 <h1>DevCon-Installer</h1>
 
+![GitHub](https://img.shields.io/github/license/Drawbackz/Devcon-Installer)
+![GitHub all releases](https://img.shields.io/github/downloads/Drawbackz/DevCon-Installer/total)
+
 Quickly download and install DevCon without downloading the entire Windows Driver Kit
 <br>
 <b>Files come directly from Microsoft servers.</b>
