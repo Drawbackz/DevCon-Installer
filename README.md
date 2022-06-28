@@ -5,7 +5,6 @@
 
 Quickly download and install DevCon without downloading the entire Windows Driver Kit
 <br>
-<b>Files come directly from Microsoft servers.</b>
 
 The Application can also add DevCon to the system PATH environment variable if selected.
 
