@@ -208,7 +208,7 @@
         "Sources": [
             {
                 "Sha256": "ADAED2F9BCD668800AC4A593535DDF8BD43617A408825CBE9A6044045CC183AB",
-                "Url": "https://download.microsoft.com/download/6/e/4/6e481b67-54af-4340-a534-25de4229cfc6/support.cab",
+                "Url": "https://web.archive.org/web/20200304212626if_/http://download.microsoft.com/download/6/e/4/6e481b67-54af-4340-a534-25de4229cfc6/support.cab",
                 "ExtractionName": "devcon.exe",
                 "Architecture": "X86"
             }
