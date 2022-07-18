@@ -1,5 +1,22 @@
 [
     {
+        "Name": "Windows 11 version 22H2 ",
+        "Sources": [
+            {
+                "Sha256": "525EF4CA5169A547692EC5ED1949F0E62C7BF290EFA2AF2F54838E478243CD97",
+                "Url": "https://download.microsoft.com/download/7/1/9/719a29d3-bf8c-49eb-b9bd-9bde8d17e142/wdk/Installers/82c1721cd310c73968861674ffc209c9.cab",
+                "ExtractionName": "fil5a9177f816435063f779ebbbd2c1a1d2",
+                "Architecture": "X86"
+            },
+            {
+                "Sha256": "8D4D43D16EFB8C34D8C56FC6AB5645B4DD64E078C96D8061A75F99D3C9CDA4CE",
+                "Url": "https://download.microsoft.com/download/7/1/9/719a29d3-bf8c-49eb-b9bd-9bde8d17e142/wdk/Installers/787bee96dbd26371076b37b13c405890.cab",
+                "ExtractionName": "filbad6e2cce5ebc45a401e19c613d0a28f",
+                "Architecture": "X64"
+            }
+        ]
+    },    
+    {
         "Name": "Windows 11 Insider Preview",
         "Sources": [
             {
