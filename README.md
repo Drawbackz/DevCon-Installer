@@ -15,6 +15,12 @@ The Application can also add DevCon to the system PATH environment variable if s
 
 <h4>Supported Versions:</h4>
 <b>
+Windows 11 version 22H2
+<br>
+Windows 11 version 21H2
+<br>
+Windows Server 2022
+<br>
 Windows 11 Insider Preview
 <br>
 Windows 10 version 2004
