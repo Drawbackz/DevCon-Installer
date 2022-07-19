@@ -1,55 +1,55 @@
 [
-	{
-		"Name": "Windows 11 version 22H2 ",
-		"Sources": [
-			{
-				"Sha256": "525EF4CA5169A547692EC5ED1949F0E62C7BF290EFA2AF2F54838E478243CD97",
-				"Url": "https://download.microsoft.com/download/7/1/9/719a29d3-bf8c-49eb-b9bd-9bde8d17e142/wdk/Installers/82c1721cd310c73968861674ffc209c9.cab",
-				"ExtractionName": "fil5a9177f816435063f779ebbbd2c1a1d2",
-				"Architecture": "X86"
-			},
-			{
-				"Sha256": "8D4D43D16EFB8C34D8C56FC6AB5645B4DD64E078C96D8061A75F99D3C9CDA4CE",
-				"Url": "https://download.microsoft.com/download/7/1/9/719a29d3-bf8c-49eb-b9bd-9bde8d17e142/wdk/Installers/787bee96dbd26371076b37b13c405890.cab",
-				"ExtractionName": "filbad6e2cce5ebc45a401e19c613d0a28f",
-				"Architecture": "X64"
-			}
-		]
-	},
-	{
-		"Name": "Windows 11 version 21H2",
-		"Sources": [
-			{
-				"Sha256": "FBD394E4407C6C334B933FF3A0D21A8E28F0EEDE0CFE5FB277287C3F994B5B00",
-				"Url": "https://download.microsoft.com/download/7/d/6/7d602355-8ae9-414c-ae36-109ece2aade6/wdk/Installers/82c1721cd310c73968861674ffc209c9.cab",
-				"ExtractionName": "fil5a9177f816435063f779ebbbd2c1a1d2",
-				"Architecture": "X86"
-			},
-			{
-				"Sha256": "CC3A7D551B7442565D4EC2A3BCD44DCBA1176362A634AAC76945EE0549597CC0",
-				"Url": "https://download.microsoft.com/download/7/d/6/7d602355-8ae9-414c-ae36-109ece2aade6/wdk/Installers/787bee96dbd26371076b37b13c405890.cab",
-				"ExtractionName": "filbad6e2cce5ebc45a401e19c613d0a28f",
-				"Architecture": "X64"
-			}
-		]
-	},
-	{
-		"Name": "Windows Server 2022",
-		"Sources": [
-			{
-				"Sha256": "B984BA280FE64B6929BED82F49DF9133AA818234B715070047EF23CB1CF4EDBF",
-				"Url": "https://download.microsoft.com/download/e/2/1/e2100c80-3148-4cee-8d67-610792a9ca97/wdk/Installers/82c1721cd310c73968861674ffc209c9.cab",
-				"ExtractionName": "fil5a9177f816435063f779ebbbd2c1a1d2",
-				"Architecture": "X86"
-			},
-			{
-				"Sha256": "B85A2B81E1518EABCC4AFDEE145304CAD9708778C0EBFC177A2DB2847D7FB355",
-				"Url": "https://download.microsoft.com/download/e/2/1/e2100c80-3148-4cee-8d67-610792a9ca97/wdk/Installers/787bee96dbd26371076b37b13c405890.cab",
-				"ExtractionName": "filbad6e2cce5ebc45a401e19c613d0a28f",
-				"Architecture": "X64"
-			}
-		]
-	},  
+    {
+        "Name": "Windows 11 version 22H2 ",
+        "Sources": [
+            {
+                "Sha256": "525EF4CA5169A547692EC5ED1949F0E62C7BF290EFA2AF2F54838E478243CD97",
+                "Url": "https://download.microsoft.com/download/7/1/9/719a29d3-bf8c-49eb-b9bd-9bde8d17e142/wdk/Installers/82c1721cd310c73968861674ffc209c9.cab",
+                "ExtractionName": "fil5a9177f816435063f779ebbbd2c1a1d2",
+                "Architecture": "X86"
+            },
+            {
+                "Sha256": "8D4D43D16EFB8C34D8C56FC6AB5645B4DD64E078C96D8061A75F99D3C9CDA4CE",
+                "Url": "https://download.microsoft.com/download/7/1/9/719a29d3-bf8c-49eb-b9bd-9bde8d17e142/wdk/Installers/787bee96dbd26371076b37b13c405890.cab",
+                "ExtractionName": "filbad6e2cce5ebc45a401e19c613d0a28f",
+                "Architecture": "X64"
+            }
+        ]
+    },
+    {
+        "Name": "Windows 11 version 21H2",
+        "Sources": [
+            {
+                "Sha256": "FBD394E4407C6C334B933FF3A0D21A8E28F0EEDE0CFE5FB277287C3F994B5B00",
+                "Url": "https://download.microsoft.com/download/7/d/6/7d602355-8ae9-414c-ae36-109ece2aade6/wdk/Installers/82c1721cd310c73968861674ffc209c9.cab",
+                "ExtractionName": "fil5a9177f816435063f779ebbbd2c1a1d2",
+                "Architecture": "X86"
+            },
+            {
+                "Sha256": "CC3A7D551B7442565D4EC2A3BCD44DCBA1176362A634AAC76945EE0549597CC0",
+                "Url": "https://download.microsoft.com/download/7/d/6/7d602355-8ae9-414c-ae36-109ece2aade6/wdk/Installers/787bee96dbd26371076b37b13c405890.cab",
+                "ExtractionName": "filbad6e2cce5ebc45a401e19c613d0a28f",
+                "Architecture": "X64"
+            }
+        ]
+    },
+    {
+        "Name": "Windows Server 2022",
+        "Sources": [
+            {
+                "Sha256": "B984BA280FE64B6929BED82F49DF9133AA818234B715070047EF23CB1CF4EDBF",
+                "Url": "https://download.microsoft.com/download/e/2/1/e2100c80-3148-4cee-8d67-610792a9ca97/wdk/Installers/82c1721cd310c73968861674ffc209c9.cab",
+                "ExtractionName": "fil5a9177f816435063f779ebbbd2c1a1d2",
+                "Architecture": "X86"
+            },
+            {
+                "Sha256": "B85A2B81E1518EABCC4AFDEE145304CAD9708778C0EBFC177A2DB2847D7FB355",
+                "Url": "https://download.microsoft.com/download/e/2/1/e2100c80-3148-4cee-8d67-610792a9ca97/wdk/Installers/787bee96dbd26371076b37b13c405890.cab",
+                "ExtractionName": "filbad6e2cce5ebc45a401e19c613d0a28f",
+                "Architecture": "X64"
+            }
+        ]
+    },
     {
         "Name": "Windows 11 Insider Preview",
         "Sources": [
