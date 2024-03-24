@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34202.233
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevCon-Installer", "DevCon-Installer\DevCon-Installer.csproj", "{EBB4E795-E5A9-4248-BAEB-05E672CD03A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevCon-Installer.Core", "DevCon-Installer.Core\DevCon-Installer.Core.csproj", "{DFC64E12-30F2-4054-8210-EAB1FC699EDC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EBB4E795-E5A9-4248-BAEB-05E672CD03A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBB4E795-E5A9-4248-BAEB-05E672CD03A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBB4E795-E5A9-4248-BAEB-05E672CD03A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBB4E795-E5A9-4248-BAEB-05E672CD03A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFC64E12-30F2-4054-8210-EAB1FC699EDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFC64E12-30F2-4054-8210-EAB1FC699EDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFC64E12-30F2-4054-8210-EAB1FC699EDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFC64E12-30F2-4054-8210-EAB1FC699EDC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E6D1B233-97FB-4522-BF1C-DCE0EE8C8D06}
+	EndGlobalSection
+EndGlobal
