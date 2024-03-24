@@ -1,5 +1,5 @@
-﻿using System;
-using Microsoft.Deployment.Compression.Cab;
+﻿using Microsoft.Deployment.Compression.Cab;
+using System;
 
 namespace devcon_installer.Utilities
 {

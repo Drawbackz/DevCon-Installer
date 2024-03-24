@@ -601,7 +601,7 @@ namespace devcon_installer.Annotations
         {
         }
 
-        public PathReferenceAttribute([NotNull] [PathReference] string basePath)
+        public PathReferenceAttribute([NotNull][PathReference] string basePath)
         {
             BasePath = basePath;
         }

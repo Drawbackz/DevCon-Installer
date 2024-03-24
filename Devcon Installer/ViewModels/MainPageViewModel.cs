@@ -1,12 +1,12 @@
-﻿using System;
+﻿using devcon_installer;
+using devcon_installer.Downloads;
+using devcon_installer.Logging;
+using Devcon_Installer.ViewModels.Base;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Forms;
-using devcon_installer;
-using devcon_installer.Downloads;
-using devcon_installer.Logging;
-using Devcon_Installer.ViewModels.Base;
 
 namespace Devcon_Installer.ViewModels
 {
@@ -108,7 +108,7 @@ namespace Devcon_Installer.ViewModels
         {
             SelectedDevconDownload = null;
 
-            var sources = DevconSources.ReadSaveFile();
+            var sources = DevconSources.ReadSaveFile(true);
             if (sources == null)
             {
                 var dt = DateTime.Now.ToLongTimeString();
@@ -121,7 +121,7 @@ namespace Devcon_Installer.ViewModels
             {
                 AvailableDownloads = new ObservableCollection<DevconDownload>(sources);
             }
-            if(AvailableDownloads.Count > 0)
+            if (AvailableDownloads.Count > 0)
                 SelectedDevconDownload = AvailableDownloads[0];
         }
 

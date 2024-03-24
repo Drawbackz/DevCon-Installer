@@ -1,5 +1,5 @@
-﻿using System.Windows.Controls;
-using Devcon_Installer.ViewModels;
+﻿using Devcon_Installer.ViewModels;
+using System.Windows.Controls;
 
 namespace Devcon_Installer.Views
 {

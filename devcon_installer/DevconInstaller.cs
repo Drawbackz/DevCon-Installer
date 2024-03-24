@@ -1,14 +1,13 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http.Headers;
-using System.Security.Principal;
-using devcon_installer.Downloads;
+﻿using devcon_installer.Downloads;
 using devcon_installer.Downloads.Base;
 using devcon_installer.Logging;
 using devcon_installer.Utilities;
 using Newtonsoft.Json;
+using System;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Security.Principal;
 
 namespace devcon_installer
 {
@@ -16,6 +15,7 @@ namespace devcon_installer
     {
         private readonly CabExtractor _extractor;
 
+        private string _downloadPath;
         private bool _addEnvironmentPath;
 
         private FileDownloader _downloader;
@@ -23,6 +23,7 @@ namespace devcon_installer
         public DevconInstaller()
         {
             _extractor = new CabExtractor();
+            _downloadPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "devcon.cab");
         }
 
         private FileDownloader Downloader
@@ -45,8 +46,11 @@ namespace devcon_installer
 
         public string LastError { get; set; }
 
-        public string DownloadPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "devcon.cab");
+        public string DownloadPath
+        {
+            get => _downloadPath;
+            set => _downloadPath = Path.Combine(value, "devcon.cab");
+        }
 
         public bool AddEnvironmentPath
         {
@@ -90,10 +94,18 @@ namespace devcon_installer
         public void UpdateSources()
         {
             LastError = null;
+
+            string sourcesFile = $"{Environment.CurrentDirectory}\\devcon_sources.json";
+            string backupFile = $"{sourcesFile}.bak";
+
             Log("Updating DevCon sources...");
-            if (File.Exists($"{Environment.CurrentDirectory}\\devcon_sources.json"))
+            if (File.Exists(sourcesFile))
             {
-                File.Move($"{Environment.CurrentDirectory}\\devcon_sources.json", $"{Environment.CurrentDirectory}\\devcon_sources.json.bak");
+                if (File.Exists(backupFile))
+                {
+                    File.Delete(backupFile);
+                }
+                File.Move(sourcesFile, backupFile);
             }
             using (var wc = new WebClient())
             {
@@ -105,26 +117,27 @@ namespace devcon_installer
                 {
                     if (args.Error != null)
                     {
-                        File.Delete($"{Environment.CurrentDirectory}\\devcon_sources.json");
-                        if (File.Exists($"{Environment.CurrentDirectory}\\devcon_sources.json.bak"))
+                        File.Delete(sourcesFile);
+                        if (File.Exists(backupFile))
                         {
-                            File.Move($"{Environment.CurrentDirectory}\\devcon_sources.json.bak", $"{Environment.CurrentDirectory}\\devcon_sources.json");
+                            File.Move(backupFile, sourcesFile);
                         }
                         else
                         {
-                            File.WriteAllText($"{Environment.CurrentDirectory}\\devcon_sources.json", JsonConvert.ToString(DevconSources.DefaultSources));
+                            File.WriteAllText(sourcesFile, JsonConvert.ToString(DevconSources.DefaultSources));
                         }
                         Log("Unable to download DevCon sources update", true);
                     }
                     else
                     {
-                        File.Delete($"{Environment.CurrentDirectory}\\devcon_sources.json.bak");
+
+                        File.Delete(backupFile);
                         OnSourcesUpdated?.Invoke();
                         Log("DevCon sources updated");
                     }
                     OnProgressChanged?.Invoke(0, string.Empty);
                 };
-                wc.DownloadFileAsync(new Uri("https://raw.githubusercontent.com/Drawbackz/DevCon-Installer/master/devcon_sources.json"), $"{Environment.CurrentDirectory}\\devcon_sources.json");
+                wc.DownloadFileAsync(new Uri("https://raw.githubusercontent.com/Drawbackz/DevCon-Installer/master/devcon_sources.json"), sourcesFile);
             }
         }
 
@@ -211,11 +224,12 @@ namespace devcon_installer
             {
                 const string name = "PATH";
                 var pathString = Environment.GetEnvironmentVariable(name);
+                var devconDirectory = Path.GetFullPath(InstallationDirectory);
 
                 if (pathString == null) throw new Exception("Unable to get path data");
-                if (pathString.Contains(InstallationDirectory)) return;
+                if (pathString.Contains(devconDirectory)) return;
 
-                var value = pathString + $";{InstallationDirectory}";
+                var value = pathString + $";{devconDirectory}";
                 const EnvironmentVariableTarget target = EnvironmentVariableTarget.Machine;
                 Environment.SetEnvironmentVariable(name, value, target);
                 Log("DevCon to system PATH success");

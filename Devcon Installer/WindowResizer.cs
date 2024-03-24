@@ -87,7 +87,7 @@ namespace Devcon_Installer
             else
                 handled = false;
 
-            return (IntPtr) 0;
+            return (IntPtr)0;
         }
 
         #endregion
@@ -110,7 +110,7 @@ namespace Devcon_Installer
 
             var lCurrentScreen = MonitorFromPoint(lMousePosition, MonitorOptions.MONITOR_DEFAULTTONEAREST);
 
-            var lMmi = (MINMAXINFO) Marshal.PtrToStructure(lParam, typeof(MINMAXINFO));
+            var lMmi = (MINMAXINFO)Marshal.PtrToStructure(lParam, typeof(MINMAXINFO));
 
             if (lPrimaryScreen.Equals(lCurrentScreen))
             {

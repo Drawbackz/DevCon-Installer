@@ -1,10 +1,9 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using devcon_installer.Downloads;
+﻿using devcon_installer.Downloads;
 using devcon_installer.Downloads.Base;
 using devcon_installer.Logging;
 using Newtonsoft.Json;
+using System;
+using System.IO;
 
 namespace devcon_installer
 {
@@ -217,12 +216,12 @@ namespace devcon_installer
 
         public static string SavePath { get; set; }
 
-        public static DevconDownload[] ReadSaveFile()
+        public static DevconDownload[] ReadSaveFile(bool create = false)
         {
             try
             {
                 var filePath = SavePath ?? $"{Environment.CurrentDirectory}\\devcon_sources.json";
-                if (!File.Exists(filePath)) CreateSourcesFile(filePath);
+                if (create && !File.Exists(filePath)) CreateSourcesFile(filePath);
                 return JsonConvert.DeserializeObject<DevconDownload[]>(File.ReadAllText(filePath));
             }
             catch (Exception e)
