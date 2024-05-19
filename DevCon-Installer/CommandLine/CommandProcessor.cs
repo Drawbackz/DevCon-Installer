@@ -21,11 +21,13 @@ namespace DevConInstaller.CommandLine
             foreach (var command in commands)
             {
                 Logger.Log(" ");
-                Logger.Info($"Command: {command.Name}");
-                Logger.Info($"Description: {command.Description}");
-
-                Logger.Warning("Arguments:");
-                LogArguments(command.Arguments);
+                Logger.Log($"Command: {command.Name}");
+                Logger.Log($"Description: {command.Description}");
+                if(command.Arguments.Count > 0)
+                {
+                    Logger.Warning("Arguments:");
+                    LogArguments(command.Arguments);
+                }
             }
 
             Logger.Log();
@@ -139,10 +141,6 @@ namespace DevConInstaller.CommandLine
             {
                 Logger.Warning($"{argument.Name}: {argument.Description} ");
                 Logger.Log();
-                if (argument.Children != null)
-                {
-                    LogArguments(argument.Children);
-                }
             }
         }
     }
