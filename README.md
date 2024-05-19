@@ -53,6 +53,35 @@ Windows XP/Vista + Windows Server 2003 (x86 only)
 </b>
 <br>
 
+## CLI
+
+<b>Update DevCon sources</b>
+```
+Devcon-Installer.exe update
+```
+
+<b>Install DevCon</b>
+```
+Devcon-Installer.exe install [-hash <file_sha256>] [-latest [-architecture <x86/x64>]] [-dir <installation_directory>] [-update] [-addpath]
+```
+
+- `-hash` SHA256 hash of the download file
+- `-latest` Use the most recent DevCon version in sources
+- `-architecture` Define the DevCon architecture variant for `-latest`
+
+- `-dir` Installation directory (optional)
+- `-update` Update sources if the file hash is not found in sources (optional)
+- `-addpath` Add the DevCon installation directory to the system path (optional)
+
+Usage Examples:
+```
+Devcon-Installer.exe install -hash 6ECFAF7042C525DDB6C0BF0501BECFBCE85CBDF2A33B1BCA67734FEA567AF3B8 -update -addpath
+```
+```
+Devcon-Installer.exe install -latest -architecture x64
+```
+
+
 ---
 <small>
 <small>
