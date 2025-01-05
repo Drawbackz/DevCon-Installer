@@ -36,7 +36,7 @@ namespace DevConInstaller.CommandLine
 
                         if (!install.UseLatest && string.IsNullOrEmpty(install.Hash))
                         {
-                            throw new ArgumentException("-latest or -hash required");
+                            throw new ArgumentException("--latest or --hash required");
                         }
                         
                         var sources = DevconSources.ReadSaveFile() ?? DevconSources.DefaultSources;

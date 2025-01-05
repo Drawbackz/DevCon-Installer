@@ -21,14 +21,14 @@ namespace DevConInstaller.CommandLine.Commands
             Description = "Install DevCon";
             Arguments = new Arguments
             {
-                new Argument("-latest", "Use the most recent DevCon version in sources", (value) =>
+                new Argument("--latest", "Use the most recent DevCon version in sources", (value) =>
                 {
                     UseLatest = true;
                 })
                 {
                     Children = new []
                     {
-                        new Argument("-architecture", "Define the DevCon architecture variant", (value) =>
+                        new Argument("--architecture", "Define the DevCon architecture variant", (value) =>
                         {
                             if (!Enum.TryParse(value?.ToUpper(), out SystemArchitecture architecture))
                             {
@@ -38,20 +38,20 @@ namespace DevConInstaller.CommandLine.Commands
                         }, true)
                     }
                 },
-                new Argument("-hash", "The download file sha256 hash", (value) =>
+                new Argument("--hash", "The download file sha256 hash", (value) =>
                 {
                     if (string.IsNullOrEmpty(value))
                     {
-                        throw new ArgumentNullException("-hash", "Argument cannot be null or empty");
+                        throw new ArgumentNullException("--hash", "Argument cannot be null or empty");
                     }
 
                     Hash = value.ToUpper();
                 }),
-                new Argument("-update", "Update sources if hash not found (limited to 1x every 12 hours)", (value) =>
+                new Argument("--update", "Update sources if hash not found (limited to 1x every 12 hours)", (value) =>
                 {
                     Update = true;
                 }),
-                new Argument("-addpath", "Add the install directory to the system path (requires administrator access)", (value) =>
+                new Argument("--addpath", "Add the install directory to the system path (requires administrator access)", (value) =>
                 {
                     if (!Permissions.IsAdministrator())
                     {
@@ -59,7 +59,7 @@ namespace DevConInstaller.CommandLine.Commands
                     }
                     AddToPath = true;
                 }),
-                new Argument("-dir", "The download and installation directory", (value) =>
+                new Argument("--dir", "The download and installation directory", (value) =>
                 {
                     Directory = value;
                 })

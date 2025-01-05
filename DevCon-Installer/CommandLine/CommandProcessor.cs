@@ -111,7 +111,7 @@ namespace DevConInstaller.CommandLine
                         argument.SetValue(null);
                         continue;
                     };
-                    var hasValue = !args[i + 1].StartsWith("-");
+                    var hasValue = !args[i + 1].StartsWith("--");
                     var value = hasValue ? args[i + 1] : null;
                     argument.SetValue(value);
                     if (hasValue) i++;
